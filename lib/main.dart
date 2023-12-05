@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project_app/home_page.dart';
+import 'package:graduation_project_app/data/transaction_data.dart';
+import 'package:graduation_project_app/page/home_page.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +12,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const HomePage(),
-      theme: ThemeData(primarySwatch: Colors.blue),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => TransactionData()),
+        // ChangeNotifierProvider(create: (context) => CategoryData()), // Add CategoryData provider
+        // Add more providers if needed
+      ],
+      builder: (context, child) => const MaterialApp(
+        home: HomePage(),
+      ),
     );
   }
 }

@@ -1,29 +1,23 @@
-class Transaction {
-  final DateTime dateTime;
-  final String description;
-  final double amount;
+import 'package:flutter/material.dart';
+import 'package:graduation_project_app/data/transaction_item.dart';
 
-  Transaction({
-    required this.dateTime,
-    required this.description,
-    required this.amount,
-  });
+class TransactionData extends ChangeNotifier {
+  List<TransactionItem> overallTransactionList = [];
 
-  static List<Transaction> transactions = [
-    Transaction(
-      dateTime: DateTime.now(),
-      description: 'Groceriessss',
-      amount: -50.0,
-    ),
-    Transaction(
-      dateTime: DateTime.now().subtract(const Duration(days: 1)),
-      description: 'Salary',
-      amount: 2000.0,
-    ),
-    Transaction(
-      dateTime: DateTime.now().subtract(const Duration(days: 2)),
-      description: 'Dinner',
-      amount: -30.0,
-    ),
-  ];
+  List<TransactionItem> getAllTransaction() {
+    overallTransactionList.sort((a, b) => b.dateTime.compareTo(a.dateTime));
+    return overallTransactionList;
+  }
+
+  void addNewTransaction(TransactionItem newTransaction) {
+    overallTransactionList.add(newTransaction);
+
+    notifyListeners();
+  }
+
+  void removeTransaction(TransactionItem transaction) {
+    overallTransactionList.remove(transaction);
+
+    notifyListeners();
+  }
 }
