@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project_app/page/test_add_transaction.dart';
 import 'package:graduation_project_app/util/balance_tile.dart';
 import 'package:graduation_project_app/util/expense_tile.dart';
 import 'package:graduation_project_app/util/income_tile.dart';

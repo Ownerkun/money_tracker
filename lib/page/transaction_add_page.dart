@@ -28,7 +28,7 @@ class _AddTransactionState extends State<AddTransaction> {
         elevation: 0,
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -59,7 +59,7 @@ class _AddTransactionState extends State<AddTransaction> {
               ),
             ),
             ListTile(
-              title: Text('Category'),
+              title: const Text('Category'),
               subtitle: DropdownButtonFormField(
                 value: _selectedCategory,
                 onChanged: (value) {
@@ -79,7 +79,7 @@ class _AddTransactionState extends State<AddTransaction> {
               ),
             ),
             ListTile(
-              title: Text('Amout'),
+              title: const Text('Amout'),
               subtitle: TextFormField(
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
@@ -93,7 +93,7 @@ class _AddTransactionState extends State<AddTransaction> {
               ),
             ),
             ListTile(
-              title: Text('Note'),
+              title: const Text('Note'),
               subtitle: TextFormField(
                 onChanged: (value) {
                   setState(() {

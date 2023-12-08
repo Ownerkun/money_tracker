@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/data/transaction_data.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class TransactionList extends StatelessWidget {
@@ -10,7 +11,7 @@ class TransactionList extends StatelessWidget {
     final transactions =
         Provider.of<TransactionData>(context).getAllTransaction();
     return transactions.isEmpty
-        ? Center(
+        ? const Center(
             child: Text('No data'),
           )
         : ListView.builder(
@@ -18,7 +19,9 @@ class TransactionList extends StatelessWidget {
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text(transactions[index].category),
-                subtitle: Text(transactions[index].dateTime.toString()),
+                // subtitle: Text(${transactions[index].dateTime.toString()}),
+                subtitle: Text(DateFormat('dd/MM/yyyy HH:mm:ss')
+                    .format(transactions[index].dateTime)),
                 trailing: Text(transactions[index].amount.toString()),
               );
             },
