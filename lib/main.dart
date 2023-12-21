@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project_app/data/category_data.dart';
 import 'package:graduation_project_app/data/transaction_data.dart';
-import 'package:graduation_project_app/page/home_page.dart';
+import 'package:graduation_project_app/helper/navigator.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -15,11 +16,12 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => TransactionData()),
+        ChangeNotifierProvider(create: (context) => CategoryData())
         // ChangeNotifierProvider(create: (context) => CategoryData()), // Add CategoryData provider
         // Add more providers if needed
       ],
       builder: (context, child) => const MaterialApp(
-        home: HomePage(),
+        home: AppNavigator(),
       ),
     );
   }

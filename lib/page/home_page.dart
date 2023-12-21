@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project_app/util/balance_tile.dart';
-import 'package:graduation_project_app/util/expense_tile.dart';
-import 'package:graduation_project_app/util/income_tile.dart';
 import 'package:graduation_project_app/page/transaction_add_page.dart';
-import 'package:graduation_project_app/util/transaction_list.dart';
+import 'package:graduation_project_app/util/tile/balance_tile.dart';
+import 'package:graduation_project_app/util/tile/expense_tile.dart';
+import 'package:graduation_project_app/util/tile/income_tile.dart';
+import 'package:graduation_project_app/util/list/transaction_list.dart';
 import 'package:flutter/cupertino.dart';
 
 class HomePage extends StatefulWidget {
@@ -37,29 +37,26 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      body: const Padding(
-        padding: EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Balancetile(),
-              ],
-            ),
-            SizedBox(height: 16),
-            Row(
-              children: [
-                IncomeTile(),
-                SizedBox(width: 16),
-                ExpenseTile(),
-              ],
-            ),
-            SizedBox(height: 16),
-            Expanded(
-              child: TransactionList(),
-            ),
-          ],
-        ),
+      body: const Column(
+        children: [
+          Row(
+            children: [
+              Balancetile(),
+            ],
+          ),
+          SizedBox(height: 16),
+          Row(
+            children: [
+              IncomeTile(),
+              SizedBox(width: 16),
+              ExpenseTile(),
+            ],
+          ),
+          SizedBox(height: 16),
+          Expanded(
+            child: TransactionList(),
+          ),
+        ],
       ),
     );
   }

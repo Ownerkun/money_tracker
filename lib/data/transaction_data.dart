@@ -15,9 +15,32 @@ class TransactionData extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateTransaction(TransactionItem updatedTransaction) {
+    int index = overallTransactionList.indexWhere(
+        (transaction) => transaction.dateTime == updatedTransaction.dateTime);
+
+    if (index != -1) {
+      overallTransactionList.removeAt(index);
+      overallTransactionList.add(updatedTransaction);
+      notifyListeners();
+    }
+  }
+
   void removeTransaction(TransactionItem transaction) {
     overallTransactionList.remove(transaction);
 
     notifyListeners();
+  }
+
+  double getTotalAmountByType(TransactionType type) {
+    double totalAmount = 0.0;
+
+    for (TransactionItem transaction in overallTransactionList) {
+      if (transaction.type == type) {
+        totalAmount += transaction.amount;
+      }
+    }
+
+    return totalAmount;
   }
 }
