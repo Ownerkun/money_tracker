@@ -16,7 +16,7 @@ class ExpenseTile extends StatelessWidget {
       child: SizedBox(
         height: 100,
         child: Card(
-          shadowColor: Colors.grey,
+          // shadowColor: Colors.grey,
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),

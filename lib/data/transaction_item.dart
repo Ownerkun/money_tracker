@@ -1,6 +1,9 @@
+import 'package:uuid/uuid.dart';
+
 enum TransactionType { income, expense }
 
 class TransactionItem {
+  final String id;
   final DateTime dateTime;
   final String category;
   final double amount;
@@ -8,7 +11,8 @@ class TransactionItem {
   final TransactionType type;
 
   TransactionItem(
-      {required this.dateTime,
+      {required this.id,
+      required this.dateTime,
       required this.category,
       required this.amount,
       required this.note,

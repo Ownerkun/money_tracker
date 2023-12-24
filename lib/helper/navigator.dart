@@ -22,9 +22,6 @@ class _AppNavigatorState extends State<AppNavigator> {
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        // selectedItemColor: Colors.white,
-        // unselectedItemColor: Colors.grey,
-        // type: BottomNavigationBarType.shifting,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

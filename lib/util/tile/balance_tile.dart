@@ -17,7 +17,7 @@ class Balancetile extends StatelessWidget {
       child: SizedBox(
         height: 150,
         child: Card(
-          shadowColor: Colors.grey,
+          // shadowColor: Colors.grey,
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),

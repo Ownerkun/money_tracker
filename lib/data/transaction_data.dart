@@ -5,30 +5,25 @@ class TransactionData extends ChangeNotifier {
   List<TransactionItem> overallTransactionList = [];
 
   List<TransactionItem> getAllTransaction() {
+    //sort transaction by dateTime
     overallTransactionList.sort((a, b) => b.dateTime.compareTo(a.dateTime));
     return overallTransactionList;
   }
 
   void addNewTransaction(TransactionItem newTransaction) {
     overallTransactionList.add(newTransaction);
-
     notifyListeners();
   }
 
   void updateTransaction(TransactionItem updatedTransaction) {
-    int index = overallTransactionList.indexWhere(
-        (transaction) => transaction.dateTime == updatedTransaction.dateTime);
-
-    if (index != -1) {
-      overallTransactionList.removeAt(index);
-      overallTransactionList.add(updatedTransaction);
-      notifyListeners();
-    }
+    removeTransaction(updatedTransaction.id);
+    addNewTransaction(updatedTransaction);
+    notifyListeners();
   }
 
-  void removeTransaction(TransactionItem transaction) {
-    overallTransactionList.remove(transaction);
-
+  void removeTransaction(String transactionId) {
+    overallTransactionList
+        .removeWhere((transaction) => transaction.id == transactionId);
     notifyListeners();
   }
 
@@ -40,7 +35,6 @@ class TransactionData extends ChangeNotifier {
         totalAmount += transaction.amount;
       }
     }
-
     return totalAmount;
   }
 }
