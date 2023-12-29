@@ -30,10 +30,10 @@ class _CategoryPageState extends State<CategoryPage> {
           child: const Icon(Icons.add),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       appBar: AppBar(
         title: const Text('Category Page'),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

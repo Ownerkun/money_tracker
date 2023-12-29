@@ -12,6 +12,7 @@ class AppNavigator extends StatefulWidget {
 
 class _AppNavigatorState extends State<AppNavigator> {
   int _selectedIndex = 0;
+  PageController _pageController = PageController(initialPage: 0);
   final List<Widget> _pages = <Widget>[
     const HomePage(),
     const CategoryPage(),
@@ -20,7 +21,19 @@ class _AppNavigatorState extends State<AppNavigator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_selectedIndex],
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (newIndex) {
+          setState(() {
+            _selectedIndex = newIndex;
+          });
+        },
+        children: const [
+          HomePage(),
+          CategoryPage(),
+          GraphPage(),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -37,7 +50,8 @@ class _AppNavigatorState extends State<AppNavigator> {
           ),
         ],
         currentIndex: _selectedIndex,
-        onTap: (newIndex) => setState(() => _selectedIndex = newIndex),
+        onTap: (newIndex) => _pageController.animateToPage(newIndex,
+            duration: const Duration(milliseconds: 500), curve: Curves.ease),
       ),
     );
   }

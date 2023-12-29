@@ -1,5 +1,3 @@
-import 'package:uuid/uuid.dart';
-
 enum TransactionType { income, expense }
 
 class TransactionItem {
