@@ -12,12 +12,7 @@ class AppNavigator extends StatefulWidget {
 
 class _AppNavigatorState extends State<AppNavigator> {
   int _selectedIndex = 0;
-  PageController _pageController = PageController(initialPage: 0);
-  final List<Widget> _pages = <Widget>[
-    const HomePage(),
-    const CategoryPage(),
-    const GraphPage(),
-  ];
+  final PageController _pageController = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

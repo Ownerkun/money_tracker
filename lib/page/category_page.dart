@@ -23,7 +23,7 @@ class _CategoryPageState extends State<CategoryPage> {
             Navigator.push(
               context,
               CupertinoPageRoute(
-                builder: (context) => const AddNewCategory(),
+                builder: (context) => AddCategory(selectedType: _selectedType),
               ),
             );
           },

@@ -10,7 +10,7 @@ import 'package:uuid/uuid.dart';
 class AddTransaction extends StatefulWidget {
   final TransactionItem? transactionToEdit;
 
-  const AddTransaction({Key? key, this.transactionToEdit}) : super(key: key);
+  const AddTransaction({super.key, this.transactionToEdit});
 
   @override
   State<AddTransaction> createState() => _AddTransactionState();

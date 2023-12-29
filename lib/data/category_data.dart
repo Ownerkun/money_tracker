@@ -14,4 +14,15 @@ class CategoryData extends ChangeNotifier {
     overallCategoryList.add(newCategory);
     notifyListeners();
   }
+
+  void updateCategory(CategoryItem updatedCategory) {
+    removeCategory(updatedCategory.id);
+    addNewCategory(updatedCategory);
+    notifyListeners();
+  }
+
+  void removeCategory(String categoryId) {
+    overallCategoryList.removeWhere((category) => category.id == categoryId);
+    notifyListeners();
+  }
 }
