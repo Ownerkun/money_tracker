@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project_app/data/transaction_data.dart';
 import 'package:graduation_project_app/page/transaction_add_page.dart';
 import 'package:graduation_project_app/util/tile/balance_tile.dart';
 import 'package:graduation_project_app/util/tile/expense_tile.dart';
 import 'package:graduation_project_app/util/tile/income_tile.dart';
 import 'package:graduation_project_app/util/list/transaction_list.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,6 +16,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+
+    Provider.of<TransactionData>(context, listen: false).prepareData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

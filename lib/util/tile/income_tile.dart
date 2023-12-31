@@ -3,8 +3,20 @@ import 'package:graduation_project_app/data/transaction_data.dart';
 import 'package:graduation_project_app/data/transaction_item.dart';
 import 'package:provider/provider.dart';
 
-class IncomeTile extends StatelessWidget {
+class IncomeTile extends StatefulWidget {
   const IncomeTile({super.key});
+
+  @override
+  State<IncomeTile> createState() => _IncomeTileState();
+}
+
+class _IncomeTileState extends State<IncomeTile> {
+  @override
+  void initState() {
+    super.initState();
+
+    Provider.of<TransactionData>(context, listen: false).prepareData();
+  }
 
   @override
   Widget build(BuildContext context) {

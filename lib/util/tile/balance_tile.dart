@@ -3,8 +3,20 @@ import 'package:graduation_project_app/data/transaction_data.dart';
 import 'package:graduation_project_app/data/transaction_item.dart';
 import 'package:provider/provider.dart';
 
-class Balancetile extends StatelessWidget {
+class Balancetile extends StatefulWidget {
   const Balancetile({super.key});
+
+  @override
+  State<Balancetile> createState() => _BalancetileState();
+}
+
+class _BalancetileState extends State<Balancetile> {
+  @override
+  void initState() {
+    super.initState();
+
+    Provider.of<TransactionData>(context, listen: false).prepareData();
+  }
 
   @override
   Widget build(BuildContext context) {

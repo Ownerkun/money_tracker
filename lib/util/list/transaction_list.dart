@@ -5,8 +5,20 @@ import 'package:graduation_project_app/page/transaction_add_page.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
-class TransactionList extends StatelessWidget {
+class TransactionList extends StatefulWidget {
   const TransactionList({super.key});
+
+  @override
+  State<TransactionList> createState() => _TransactionListState();
+}
+
+class _TransactionListState extends State<TransactionList> {
+  @override
+  void initState() {
+    super.initState();
+
+    Provider.of<TransactionData>(context, listen: false).prepareData();
+  }
 
   @override
   Widget build(BuildContext context) {

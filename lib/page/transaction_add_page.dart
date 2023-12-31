@@ -30,6 +30,8 @@ class _AddTransactionState extends State<AddTransaction> {
   @override
   void initState() {
     super.initState();
+    Provider.of<CategoryData>(context, listen: false).prepareData();
+
     if (widget.transactionToEdit != null) {
       _transactionId = widget.transactionToEdit!.id;
       _selectedDateTime = widget.transactionToEdit!.dateTime;

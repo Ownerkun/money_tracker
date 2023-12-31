@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/data/transaction_item.dart';
+import 'package:graduation_project_app/database/hive_database.dart';
 
 class TransactionData extends ChangeNotifier {
   List<TransactionItem> overallTransactionList = [];
@@ -10,9 +11,17 @@ class TransactionData extends ChangeNotifier {
     return overallTransactionList;
   }
 
+  final transactionDatabase = HiveDatabase();
+  void prepareData() {
+    if (transactionDatabase.readTransactionData().isNotEmpty) {
+      overallTransactionList = transactionDatabase.readTransactionData();
+    }
+  }
+
   void addNewTransaction(TransactionItem newTransaction) {
     overallTransactionList.add(newTransaction);
     notifyListeners();
+    transactionDatabase.saveTransactionData(overallTransactionList);
   }
 
   void updateTransaction(TransactionItem updatedTransaction) {
@@ -25,6 +34,7 @@ class TransactionData extends ChangeNotifier {
     overallTransactionList
         .removeWhere((transaction) => transaction.id == transactionId);
     notifyListeners();
+    transactionDatabase.saveTransactionData(overallTransactionList);
   }
 
   double getTotalAmountByType(TransactionType type) {
