@@ -23,6 +23,9 @@ class _AddCategoryState extends State<AddCategory> {
   String _categoryId = '';
   String _categoryName = '';
 
+  final _formKey = GlobalKey<FormState>();
+  bool _saveButtonTapped = false;
+
   @override
   void initState() {
     super.initState();
@@ -43,100 +46,116 @@ class _AddCategoryState extends State<AddCategory> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  return ToggleButtons(
-                    renderBorder: false,
-                    constraints:
-                        BoxConstraints.expand(width: constraints.maxWidth / 2),
-                    isSelected: [
-                      _selectedType == CategoryType.income,
-                      _selectedType == CategoryType.expense,
-                    ],
-                    onPressed: (index) {
-                      setState(() {
-                        _selectedType = index == 0
-                            ? CategoryType.income
-                            : CategoryType.expense;
-                      });
-                    },
-                    children: const [
-                      Text('Income'),
-                      Text('Expense'),
-                    ],
-                  );
-                },
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            TextFormField(
-              initialValue: _categoryName,
-              onChanged: (value) {
-                setState(() {
-                  _categoryName = value;
-                });
-              },
-              decoration: const InputDecoration(
-                labelText: 'Enter Category Name',
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            Wrap(
-              spacing: 10,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    save();
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    return ToggleButtons(
+                      renderBorder: false,
+                      constraints: BoxConstraints.expand(
+                          width: constraints.maxWidth / 2),
+                      isSelected: [
+                        _selectedType == CategoryType.income,
+                        _selectedType == CategoryType.expense,
+                      ],
+                      onPressed: (index) {
+                        setState(() {
+                          _selectedType = index == 0
+                              ? CategoryType.income
+                              : CategoryType.expense;
+                        });
+                      },
+                      children: const [
+                        Text('Income'),
+                        Text('Expense'),
+                      ],
+                    );
                   },
-                  child: const Text('Save Category'),
                 ),
-                Visibility(
-                  visible: widget.categoryToEdit != null,
-                  child: ElevatedButton(
+              ),
+              const SizedBox(height: 16.0),
+              TextFormField(
+                initialValue: _categoryName,
+                onChanged: (value) {
+                  setState(() {
+                    _categoryName = value;
+                  });
+                },
+                decoration: const InputDecoration(
+                  labelText: 'Enter Category Name',
+                ),
+              ),
+              if (_saveButtonTapped &&
+                  (_formKey.currentState?.validate() == false ||
+                      _categoryName.isEmpty))
+                const Text(
+                  'Please fill in Category Name.',
+                  style: TextStyle(color: Colors.red),
+                ),
+              const SizedBox(height: 16.0),
+              Wrap(
+                spacing: 10,
+                children: [
+                  ElevatedButton(
                     onPressed: () {
-                      // Show a confirmation dialog
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text("Delete Category"),
-                            content: const Text(
-                                "Are you sure you want to delete this category?"),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context)
-                                      .pop(); // Close the dialog
-                                },
-                                child: const Text("Cancel"),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  // Delete the transaction and close the dialog
-                                  deleteCategory();
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text("Delete"),
-                              ),
-                            ],
-                          );
-                        },
-                      );
+                      setState(() {
+                        _saveButtonTapped = true;
+                      });
+                      if (_formKey.currentState?.validate() == true &&
+                          _categoryName.isNotEmpty) {
+                        save();
+                      }
                     },
-                    child: const Text("Delete"),
+                    child: const Text('Save Category'),
                   ),
-                ),
-              ],
-            ),
-          ],
+                  Visibility(
+                    visible: widget.categoryToEdit != null,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // Show a confirmation dialog
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text("Delete Category"),
+                              content: const Text(
+                                  "Are you sure you want to delete this category?"),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pop(); // Close the dialog
+                                  },
+                                  child: const Text("Cancel"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    // Delete the transaction and close the dialog
+                                    deleteCategory();
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text("Delete"),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      child: const Text("Delete"),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -146,6 +165,7 @@ class _AddCategoryState extends State<AddCategory> {
     if (widget.categoryToEdit == null) {
       _categoryId = const Uuid().v4();
     }
+    _categoryName = _categoryName.replaceAll(RegExp(r'\s+$'), '');
     CategoryItem newCategory =
         CategoryItem(id: _categoryId, name: _categoryName, type: _selectedType);
 

@@ -340,6 +340,7 @@ class _AddTransactionState extends State<AddTransaction> {
     if (widget.transactionToEdit == null) {
       _transactionId = const Uuid().v4();
     }
+    _note = _note.replaceAll(RegExp(r'\s+$'), '');
     TransactionItem newTransaction = TransactionItem(
       id: _transactionId,
       dateTime: _selectedDateTime,
