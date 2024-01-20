@@ -65,7 +65,6 @@ class _TransactionListState extends State<TransactionList> {
               }
               return ListTile(
                 onTap: () {
-                  printTransactionsToConsole(transaction);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -93,7 +92,7 @@ class _TransactionListState extends State<TransactionList> {
                   ),
                 ),
               );
-            }).toList(),
+            }),
             if (isLastList) const SizedBox(height: 50),
           ],
         );
@@ -115,16 +114,5 @@ class _TransactionListState extends State<TransactionList> {
     }
 
     return groupedTransactions;
-  }
-
-  void printTransactionsToConsole(TransactionItem transaction) {
-    // Print details of the specific transaction to console
-    print('Transaction Details:');
-    print('Date: ${transaction.dateTime}');
-    print('Category: ${transaction.category}');
-    print('Amount: ${transaction.amount}');
-    print('Note: ${transaction.note}');
-    print('Type: ${transaction.type}');
-    print('---');
   }
 }

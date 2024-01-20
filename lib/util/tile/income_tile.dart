@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/data/transaction_data.dart';
 import 'package:graduation_project_app/data/transaction_item.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class IncomeTile extends StatefulWidget {
@@ -24,6 +25,7 @@ class _IncomeTileState extends State<IncomeTile> {
 
     double totalIncome =
         transactionData.getTotalAmountByType(TransactionType.income);
+
     return Expanded(
       child: SizedBox(
         height: 100,
@@ -37,13 +39,19 @@ class _IncomeTileState extends State<IncomeTile> {
             children: [
               ListTile(
                 leading: const Icon(Icons.attach_money_rounded),
-                title: Text(
-                  totalIncome > 0
-                      ? totalIncome.toStringAsFixed(2) // Format as currency
-                      : '0.0',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
+                title: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    totalIncome > 0
+                        ? NumberFormat.currency(
+                            symbol: '',
+                            decimalDigits: 2,
+                          ).format(totalIncome)
+                        : '0.0',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
                 subtitle: const Text(

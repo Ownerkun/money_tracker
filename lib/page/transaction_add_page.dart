@@ -359,8 +359,6 @@ class _AddTransactionState extends State<AddTransaction> {
       Provider.of<TransactionData>(context, listen: false)
           .addNewTransaction(newTransaction);
     }
-    printTransactionsToConsole(context);
-
     Navigator.pop(context);
   }
 
@@ -371,23 +369,5 @@ class _AddTransactionState extends State<AddTransaction> {
           .removeTransaction(widget.transactionToEdit!.id);
       Navigator.pop(context); // Close the AddTransaction page
     }
-  }
-
-  void printTransactionsToConsole(BuildContext context) {
-    // Access the TransactionData provider
-    TransactionData transactionData =
-        Provider.of<TransactionData>(context, listen: false);
-
-    // Print all transactions to console
-    print('All Transactions:');
-    transactionData.getAllTransaction().forEach((transaction) {
-      print('Date: ${transaction.id}');
-      print('Date: ${transaction.dateTime}');
-      print('Category: ${transaction.category}');
-      print('Amount: ${transaction.amount}');
-      print('Note: ${transaction.note}');
-      print('type: ${transaction.type}');
-      print('---');
-    });
   }
 }

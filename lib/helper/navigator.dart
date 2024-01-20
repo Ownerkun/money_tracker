@@ -41,7 +41,7 @@ class _AppNavigatorState extends State<AppNavigator> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart),
-            label: 'Chart',
+            label: 'Graph',
           ),
         ],
         currentIndex: _selectedIndex,

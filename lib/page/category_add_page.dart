@@ -192,12 +192,4 @@ class _AddCategoryState extends State<AddCategory> {
       Navigator.pop(context); // Close the AddTransaction page
     }
   }
-
-  void printToConsole(BuildContext context) {
-    print('Category:');
-    print('ID: $_categoryId');
-    print('Name: $_categoryName');
-    print('Category: $_selectedType');
-    print('---');
-  }
 }

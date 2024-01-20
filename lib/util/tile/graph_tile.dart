@@ -5,7 +5,7 @@ import 'package:graduation_project_app/data/transaction_item.dart';
 import 'package:provider/provider.dart';
 
 class CategoryGraph extends StatelessWidget {
-  const CategoryGraph({Key? key}) : super(key: key);
+  const CategoryGraph({super.key});
 
   @override
   Widget build(BuildContext context) {

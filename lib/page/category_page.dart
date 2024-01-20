@@ -5,7 +5,7 @@ import 'package:graduation_project_app/util/list/category_list.dart';
 import 'package:flutter/cupertino.dart';
 
 class CategoryPage extends StatefulWidget {
-  const CategoryPage({Key? key}) : super(key: key);
+  const CategoryPage({super.key});
 
   @override
   State<CategoryPage> createState() => _CategoryPageState();

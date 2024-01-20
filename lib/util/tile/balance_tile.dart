@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project_app/data/transaction_data.dart';
 import 'package:graduation_project_app/data/transaction_item.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class Balancetile extends StatefulWidget {
@@ -29,18 +30,25 @@ class _BalancetileState extends State<Balancetile> {
       child: SizedBox(
         height: 150,
         child: Card(
-          // shadowColor: Colors.grey,
           elevation: 10,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                balance != 0.0 ? balance.toStringAsFixed(2) : '0.0',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
+              FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  balance != 0.0
+                      ? NumberFormat.currency(
+                          symbol: '',
+                          decimalDigits: 2,
+                        ).format(balance)
+                      : '0.0',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
                 ),
               ),
               const Text(
